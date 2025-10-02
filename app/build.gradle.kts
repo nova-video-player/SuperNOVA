@@ -15,6 +15,23 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            abiFilters.add("arm64-v8a")
+        }
+
+        externalNativeBuild {
+            cmake {
+                cppFlags += "-std=c++17"
+                arguments += listOf(
+                    "-DANDROID_STL=c++_shared",
+                    "-DFFTW3_INCLUDE_DIR=${project.rootDir}/native/fftw3-android-builder/build/arm64-v8a/install/include",
+                    "-DFFTW3_LIBRARY=${project.rootDir}/native/fftw3-android-builder/build/arm64-v8a/libfftw3.so",
+                    "-DONNXRUNTIME_INCLUDE_DIR=${project.rootDir}/native/onnxruntime-android-builder/include",
+                    "-DONNXRUNTIME_LIBRARY=${project.rootDir}/native/onnxruntime-android-builder/lib/arm64-v8a/libonnxruntime.so"
+                )
+            }
+        }
     }
 
     buildTypes {
@@ -39,6 +56,12 @@ android {
     sourceSets {
         getByName("main") {
             aidl.srcDirs("src/main/aidl")
+        }
+    }
+    externalNativeBuild {
+        cmake {
+            path = file("src/main/cpp/CMakeLists.txt")
+            version = "3.22.1"
         }
     }
 }
