@@ -249,7 +249,7 @@ std::cerr << "Called destructor" << std::endl;
 
 
 extern "C" JNIEXPORT jlong JNICALL
-Java_org_courville_nova_ai_SpeechSeparator_create(JNIEnv *env, jobject thiz, jstring modelPath) {
+Java_org_courville_supernova_ai_SpeechSeparator_create(JNIEnv *env, jobject thiz, jstring modelPath) {
     const char *path = env->GetStringUTFChars(modelPath, nullptr);
     std::string pathStr(path);
     env->ReleaseStringUTFChars(modelPath, path);
@@ -257,12 +257,12 @@ Java_org_courville_nova_ai_SpeechSeparator_create(JNIEnv *env, jobject thiz, jst
 }
 
 extern "C" JNIEXPORT void JNICALL
-Java_org_courville_nova_ai_SpeechSeparator_setControl(JNIEnv *env, jobject thiz, jlong separator, jfloat control) {
+Java_org_courville_supernova_ai_SpeechSeparator_setControl(JNIEnv *env, jobject thiz, jlong separator, jfloat control) {
     ((SpeechSeparator *) separator)->control = control;
 }
 
 extern "C" JNIEXPORT void JNICALL
-Java_org_courville_nova_ai_SpeechSeparator_run(JNIEnv *env, jobject thiz, jlong separator, jint sample_count, jfloatArray input1, jfloatArray input2, jfloatArray output1, jfloatArray output2) {
+Java_org_courville_supernova_ai_SpeechSeparator_run(JNIEnv *env, jobject thiz, jlong separator, jint sample_count, jfloatArray input1, jfloatArray input2, jfloatArray output1, jfloatArray output2) {
     auto *s = (SpeechSeparator *) separator;
     jfloat *in1 = env->GetFloatArrayElements(input1, nullptr);
     jfloat *in2 = env->GetFloatArrayElements(input2, nullptr);
@@ -278,7 +278,7 @@ Java_org_courville_nova_ai_SpeechSeparator_run(JNIEnv *env, jobject thiz, jlong 
 }
 
 extern "C" JNIEXPORT void JNICALL
-Java_org_courville_nova_ai_SpeechSeparator_destroy(JNIEnv *env, jobject thiz, jlong separator) {
+Java_org_courville_supernova_ai_SpeechSeparator_destroy(JNIEnv *env, jobject thiz, jlong separator) {
     delete (SpeechSeparator *) separator;
 }
 
