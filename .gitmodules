@@ -1,0 +1,7 @@
+[submodule "native/fftw3-android-builder"]
+	path = native/fftw3-android-builder
+	url = git@github.com:nova-video-player/aos-fftw3-android-builder.git
+
+[submodule "native/onnxruntime-android-builder"]
+	path = native/onnxruntime-android-builder
+	url = ssh://git@github.com/nova-video-player/aos-onnxruntime-android-builder.git
